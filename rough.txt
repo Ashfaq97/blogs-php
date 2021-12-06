@@ -1,0 +1,63 @@
+<?php 
+    session_start();
+
+    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+        header("location: login.php");
+        exit;
+    }
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        include 'partials/_dbconnect.php';
+
+        $subject = $_POST["subject"];
+        $tags = $_POST["tags"];
+        $description = $_POST["description"];
+        $createdby = $_SESSION['username'];
+
+        $sql = INSERT INTO `blogs`(`subject`, `description`, `tags`, `postdate`, `createdby`) VALUES (   '$subject','$description','$tags', 'date("Y.m.d")','$username')
+    }        
+?> 
+
+
+###########   BLOG PAGE    ############
+<!--<div class="displayInline" style="margin-top: 30px;">
+      <div class="viewBlog">
+        <h4> Blog posted by <?php echo $row['createdby']; ?>  </h4>
+        <h5> Subject </h5>
+        <p> <?php echo $row['subject']; ?> </p>
+        <h5> Description </h5>
+        <p> <?php echo $row['description']; ?> </p>
+        <h5> Tags </h5>
+        <ul>
+        <?php 
+            while($tagRow = mysqli_fetch_array($tagResult)){
+                echo "<li>" .$tagRow['tag']. "</li>";
+            }
+        ?>
+        </ul>
+        <h5> Comments </h5>
+        <ul>
+        <?php
+            while($commentRow = mysqli_fetch_array($commentResult)){
+                echo "<li>" .$commentRow['description']. " (posted by: " .$commentRow['postedBy']. ")</li>";
+            }
+        ?>
+        </ul>
+      </div>-->
+
+
+##########    WRITE COMMENT    #########
+
+<form method="post" action="comment.php">
+    <label for="sentiment">Choose a sentiment:</label>
+    <select id="sentiment" name="sentiment">
+        
+        <option value="positive">Positive</option>
+        <option value="negative">Negative</option>
+    </select>
+    <br />
+    <input type ="text" id="commdesc" class="input" name="commdesc" placeholder="Comment here" >
+    <input type= "hidden" id="blogid" class="input" name="blogid" value="<?php echo $id; ?>">
+    <input type= "hidden" id="poster" class="input" name="poster" value="<?php echo $postedBy; ?>">
+    <input type="submit" value="Post comment">
+</form>

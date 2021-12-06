@@ -19,7 +19,7 @@
             session_start();
             $_SESSION['loggedin'] = 'true';
             $_SESSION['username'] = $username;
-            header("location:welcome.php");
+            header("location:user_home.php");
         }
         else {
             $showError = "Invalid Credentials";
