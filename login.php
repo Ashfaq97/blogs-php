@@ -11,7 +11,7 @@
         $lastname = $_POST["lastname"];
         $email = $_POST["email"];
 
-        $sql = "SELECT * FROM `user` WHERE  `username`='$username' AND  `password`='$password' AND      `firstName`='$firstname' AND    `lastName`='$lastname' AND  `email`='$email';";
+        $sql = "SELECT * FROM `users` WHERE  `username`='$username' AND  `password`='$password' AND      `firstName`='$firstname' AND    `lastName`='$lastname' AND  `email`='$email';";
         $result = mysqli_query($conn, $sql);
         $num = mysqli_num_rows($result);
         if($num == 1){
@@ -58,7 +58,7 @@
     <div class="container col-md-6">
         <h1 class="text-center">Login</h1>
 
-        <form action="/comp440_login_page/login.php" method="post">
+        <form action="login.php" method="post">
 
         <div class="mb-3">
                 <label for="username" class="form-label">Username</label>

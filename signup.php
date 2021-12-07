@@ -15,7 +15,7 @@
         $exists = false;
 
         if(($password == $confpass) && ($exists == false)){
-            $sql = "INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `email`) VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
+            $sql = "INSERT INTO `users` (`username`, `password`, `firstName`, `lastName`, `email`) VALUES ('$username', '$password', '$firstname', '$lastname', '$email');";
             $result = mysqli_query($conn, $sql);
             if($result){
                 $showAlert = true;
@@ -56,7 +56,7 @@
     <div class="container col-md-6">
         <h1 class="text-center">Signup</h1>
 
-        <form action="/comp440_login_page/signup.php" method="post">
+        <form action="signup.php" method="post">
 
         <div class="mb-3">
                 <label for="username" class="form-label">Username</label>

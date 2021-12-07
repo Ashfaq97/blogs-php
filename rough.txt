@@ -61,3 +61,17 @@
     <input type= "hidden" id="poster" class="input" name="poster" value="<?php echo $postedBy; ?>">
     <input type="submit" value="Post comment">
 </form>
+
+
+###########    QUERY 1     #############
+
+<?php 
+        while($row=$result->fetch_assoc())
+        { ?>
+           <h3>1. List all the blogs of user X, such that all the comments are 
+         positive for these blogs.</h3>
+           <h4>Subject: <?php echo $row['subject'];?></h4>
+           <h4>Description: <?php echo $row['description'];?></h4>
+        <?php
+        }
+    ?>

@@ -1,6 +1,6 @@
 <?php 
 
-    session_start();
+    include 'partials/_nav.php';
     //connect db
     include 'partials/_dbconnect.php';
     //got blog id
@@ -30,7 +30,6 @@
     <title>Blog Page</title>
 </head>
 <body>
-    <?php include "partials/_nav.php" ?>
 
     <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
@@ -40,17 +39,29 @@
         </div>
     </div>
 
-    <div class="comment">
-        <div class="blog-sub">Leave a comment:</div>
+    <div class="container col-md-6">
+        <div class="text-center">Leave a comment:</div>
 
         <form action="comment.php" method="post">
-            <select name="sentiment" required>
+            <!-- <select name="sentiment" required>
                 <option value="" disabled selected hidden>Choose a sentiment</option>
                 <option value="Positive">Positive</option>
                 <option value="Negative">Negative</option>
-            </select>
-            <textarea class="textarea" name="comment" rows="2" cols="72" placeholder="Type your comment here" required></textarea>
-            <button class="commentbtn" type="submit" name="submit" value="choose sentiment">Post Comment</button>
+            </select> -->
+            <div class="mb-3">
+                <select class="form-select col-md-3" aria-label="Default select example" name="sentiment" required>
+                    <option value="" disabled selected hidden>Choose a sentiment</option>
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <textarea class="textarea" name="comment" rows="2" cols="72" placeholder="Type your comment here" required></textarea>
+            </div>
+            
+            <!-- <button type="button" class="btn btn-outline-primary">Primary</button> -->
+            <button class="btn btn-outline-primary" type="submit" name="submit" value="choose sentiment">Post Comment</button>
         </form>
 
     </div> 

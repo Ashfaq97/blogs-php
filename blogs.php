@@ -1,5 +1,5 @@
 <?php  
-    session_start();
+    include 'partials/_nav.php';
 
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
         header("location: login.php");
@@ -10,7 +10,7 @@
     
     include 'partials/_dbconnect.php';
 
-    $sql = "SELECT `blogid`, `subject`, `createdby` FROM blogs" ;
+    $sql = "SELECT `blogid`, `subject`, `created_by` FROM blogs" ;
     $viewblogs = mysqli_query($conn, $sql);
     if (!$viewblogs) {
         printf("Error: %s\n", mysqli_error($conn));
@@ -31,15 +31,15 @@
     <title>Blogs</title>
 </head>
 <body>
-    <?php include 'partials/_nav.php' ?>
+    
     <h1>Hello <?php echo $_SESSION['username']; ?>!</h1>
     <h3>Here are a few blogs to read...</h3> 
 
     <div class="blogList">
-        <ul class='list'>
+        <ul class="list-group list-group-flush" style="text-align: center;">
             <?php
                 while($row = mysqli_fetch_array($viewblogs)){
-                    echo "<li class='list'> <a href='blogPage.php?bid=". $row['blogid'] ."'> <b> Subject: </b>" . $row['subject'] . "<b> posted by </b>" . $row['createdby'] . "</a> </li>";
+                    echo "<li class='list-group-item'> <a href='blogPage.php?bid=". $row['blogid'] ."'> <b> Subject: </b>" . $row['subject'] . "<b> posted by </b>" . $row['created_by'] . "</a> </li>";
                 } 
             ?>
         </ul>

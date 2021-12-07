@@ -3,7 +3,7 @@
 
 
 <?php
-    session_start();
+    require 'partials/_nav.php';
 
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
         header("location: login.php");
@@ -20,8 +20,8 @@
         $newtags = explode(",", $tags);
         $TagArray = array_map('trim',$newtags);
 
-        $postdate = date("Y-m-d");
-        $createdby = $_SESSION['username'];
+        $pdate = date("Y-m-d");
+        $created_by = $_SESSION['username'];
 
         $data = $_POST;
 
@@ -37,7 +37,7 @@
         include 'partials/_dbconnect.php';
 
         //Cannot post of count > 2
-        $blogCount = "SELECT COUNT(*) from blogs WHERE createdby = '$createdby' AND postdate = '$postdate';" ;
+        $blogCount = "SELECT COUNT(*) from blogs WHERE created_by = '$created_by' AND pdate = '$pdate';" ;
         $count = mysqli_query($conn, $blogCount);
             
         while($row = mysqli_fetch_array($count)) {
@@ -50,7 +50,7 @@
 
         //Insert 
         //insert into blogs
-        $insertBlog = "INSERT INTO blogs (`subject`, `description`, `postdate`, `createdby`) VALUES ('$subject', '$description', '$postdate', '$createdby');";
+        $insertBlog = "INSERT INTO blogs (`subject`, `description`, `pdate`, `created_by`) VALUES ('$subject', '$description', '$pdate', '$created_by');";
         $result = mysqli_query($conn, $insertBlog);
 
         if(!$result)
@@ -105,7 +105,7 @@
     </script>
 </head>
 <body>
-    <?php require 'partials/_nav.php' ?>
+    
 
     <!-- <form method="post" action="initialize.php"> -->
     <?php  if (isset($_SESSION['username'])) : ?>
@@ -115,7 +115,7 @@
         <div class="container col-md-6">
             <h1 class="text-center">Wanna post a blog?</h1>
 
-            <form action="/comp440_login_page/user_home.php" method="post">
+            <form action="user_home.php" method="post">
 
                 <div class="mb-3">
                     <label for="subject" class="form-label">Subject</label>
